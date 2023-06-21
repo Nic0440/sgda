@@ -25,6 +25,7 @@ $route->get("/calendario", "Web:calendar");
 $route->get("/horarios", "Web:timetable");
 $route->get("/protocolos", "Web:protocols");
 $route->get("/turmas", "Web:classes");
+$route->get("/cadastro", "Web:register");
 $route->get("/horarios/{turma}","Web:timetable");
 
 

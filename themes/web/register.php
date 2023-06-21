@@ -1,5 +1,5 @@
 <?php
-$this->layout("_theme", ['title' => 'Cadatro']);
+//$this->layout("_theme", ['title' => 'Cadatro']);
 ?>
 <form class="form form--register" method="post">
    <h1>Cadastro</h1>

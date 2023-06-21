@@ -78,7 +78,6 @@ ul {
   position: fixed;
   padding: 0 40px;
   transition: height 0.3s ease-in-out;
-  z-index: 222;
   transition: background-color 0.3s ease-in-out;
 }
 
