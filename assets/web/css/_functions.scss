@@ -1,0 +1,53 @@
+@mixin transition($properties) {
+    transition: $properties;
+}
+
+@mixin setSize($width, $height: null) {
+    @if $height == null {
+        width: $width;
+        height: $width;
+    }
+
+    @else {
+        width: $width;
+        height: $height;
+    }
+}
+
+@mixin flexbox($alignItems, $justifyContent : null, $flexDirection : null, $gap : null, $wrap : null) {
+    display: flex;
+    align-items: $alignItems;
+    justify-content: $justifyContent;
+    flex-direction: $flexDirection;
+    gap: $gap;
+    flex-wrap: $wrap;
+
+}
+@mixin absolute($top, $bottom : null, $right : null, $left : null){
+    @if $bottom == null or $right == null or $left == null{
+        inset: $top;
+    }
+    @else{
+        top: $top;
+        bottom: $bottom;
+        right: $right;
+        left: $left;
+    }
+    position: absolute;
+}
+@mixin margin-padding ($margin, $padding : null){
+    @if $padding == null{
+        margin: $margin;
+        padding: $margin;
+    }
+    @else{
+        margin: $margin;
+        padding: $padding;
+    }
+}
+@mixin background($color, $opacity, $display, $zIndex){
+    background-color: $color;
+    opacity: $opacity;
+    display: $display;
+    z-index: $zIndex;
+}

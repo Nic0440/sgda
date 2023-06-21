@@ -1,0 +1,856 @@
+@import './colors';
+@import './size';
+@import './functions';
+
+* {
+    @include margin-padding(0);
+    box-sizing: border-box;
+    font-size: $normal;
+}
+
+.body-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.anchor--none {
+    @include background(none, default, block, default);
+    @include margin-padding(0);
+    text-decoration: none;
+    border: none;
+    color: $textColor;
+}
+
+p {
+    @include margin-padding(0);
+}
+
+ul {
+    list-style: none
+}
+
+.fa-angle-down {
+    @include flexbox(center, center);
+}
+
+.message-login {
+    @include setSize(250px, 200px);
+    @include margin-padding(auto, 10px);
+    @include flexbox(default, space-between, column);
+    display: none;
+    position: fixed;
+    background: blue;
+    inset: 0;
+    z-index: 999;
+    border-radius: 5px;
+
+    i {
+        cursor: pointer;
+        transition: color .3s ease-in-out;
+    }
+
+
+    i:hover {
+        color: #ffffff;
+    }
+}
+
+.header {
+    @include setSize(100%, 65px);
+    position: fixed;
+    padding: 0 40px;
+    transition: height .3s ease-in-out;
+    z-index: 222;
+    transition: background-color .3s ease-in-out;
+}
+
+.navbar {
+    @include flexbox(center, default, default);
+
+    &__container {
+        gap: 20px;
+    }
+
+    height: 100%;
+
+    * {
+        color: $textColor;
+    }
+
+    &__group {
+
+        &--right {
+            @include flexbox(default, flex-end, default, 10px);
+            flex: 1;
+
+            i {
+                font-size: 1.6rem;
+                cursor: pointer;
+                transition: color .3s ease-in-out;
+            }
+
+        }
+    }
+
+    &__cell {
+        @include margin-padding(default, 8px 30px);
+        cursor: pointer;
+        transition: color .3s ease-in-out, background-color .3s ease-in-out;
+        position: relative;
+
+        &:not(.logo):hover {
+            background: $gray;
+
+            span {
+                border-bottom: 1px solid $textColor;
+            }
+        }
+
+        span {
+            border-bottom: 1px solid transparent;
+        }
+
+        &:hover &--menu {
+            opacity: 1;
+            pointer-events: auto;
+
+        }
+
+        &:nth-of-type(2) &--menu {
+            width: fit-content;
+
+            * {
+                white-space: nowrap;
+            }
+        }
+
+        &--menu {
+            @include setSize(500px, fit-content);
+            @include flexbox(default, space-between, default, 20px, wrap);
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            inset: 100% 25px 0 0;
+            background-color: $gray;
+            padding: 30px;
+            cursor: auto;
+            transition: all .3s ease-in-out;
+
+            .list--item {
+                .js-item-lock {
+
+                    &,
+                    i {
+                        color: lighten($color: $gray, $amount: 20%);
+                    }
+                }
+
+                @include flexbox(default, default, column, 30px);
+
+                i {
+                    padding-right: 10px;
+                }
+
+                a {
+                    transition: color .3s ease-in-out;
+                }
+
+                a:not(.js-item-lock):hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.logo {
+    height: 50px;
+    transition: height .3s ease-in-out;
+}
+
+.main__container {
+    &--main {
+        h2 {
+            border-bottom: 1px solid gray;
+            border-radius: 5px 5px 0 0;
+            background-color: gray;
+        }
+
+    }
+
+    &--content {
+        display: grid;
+
+        h2 {
+
+            &,
+            * {
+                font-size: 1.5rem;
+            }
+
+            i {
+                padding-right: 20px;
+            }
+        }
+
+        .more {
+            text-align-last: end;
+            padding-top: 10px;
+        }
+    }
+
+    &--main {
+        padding: 200px 40px;
+        position: relative;
+
+        .main__container--content {
+            grid-template-columns: 435px 1fr 300px;
+            grid-template-rows: 300px 400px;
+            grid-gap: 10px;
+        }
+    }
+
+
+    &--filter {
+        @include absolute(0);
+        @include background(black, .8, default, 1);
+    }
+
+    &--image {
+        @include absolute(0);
+        transition: all .3s ease-in-out;
+        background-image: url(../imgs/school.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 60vh;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: linear-gradient(transparent 66%, gray);
+            bottom: 0;
+        }
+    }
+
+
+    &--item {
+        @include background(lightgray, default, default, 1);
+        transition: all .3s ease-in-out;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 3), 0 4px 8px rgba(0, 0, 0, 0.3);
+
+        &>* {
+            padding: 20px;
+        }
+
+        &.calendar {
+
+            grid-column: 1 / span 1;
+            grid-row: 1 / span 2;
+            height: fit-content;
+        }
+
+        &.news {
+            grid-column: 3/span 1;
+            grid-row: 1/span 2;
+        }
+
+        &.hints {
+            grid-column: 2 / span 1;
+            grid-row: 2 / span 1;
+        }
+
+        &.messages {
+            grid-column: 2/span 1;
+            grid-row: 1 /span 1;
+
+        }
+    }
+
+}
+
+.main__container--timetable {
+    flex: 1;
+    display: flex;
+
+    .list--itens {
+        @include flexbox(default, default, column);
+        @include margin-padding(65px 0 0 0, 20px 0);
+        background: var(--backgroundColor);
+
+        .list__item--item {
+            display: flex;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 15px;
+            color: $textColor;
+
+            &:hover {
+                background: lighten($color: red, $amount: 10%);
+            }
+
+            span {
+                flex: 1;
+                padding-right: 10px;
+            }
+
+            i:first-child {
+                width: 40px;
+            }
+        }
+
+        .list__itens {
+
+            max-height: 100px;
+            overflow-y: scroll;
+            margin-bottom: 10px;
+
+            &--item {
+                padding: 10px 10px 10px 35px;
+                cursor: pointer;
+               
+            }
+        }
+    }
+}
+
+
+
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: $gray;
+}
+
+.main__container--login {
+    overflow-y: hidden;
+    display: flex;
+    height: 100vh;
+
+    .main__container--content {
+        grid-template-columns: 550px 1fr;
+        width: 100vw;
+    }
+
+    .banner {
+        transition: all .3s ease-in-out;
+        background-image: url(../imgs/Salle_de_lecture_Bibliothèque_Mazarine_depuis_gallerie.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        .to-back {
+            display: inline-block;
+            color: white;
+            padding: 10px;
+
+            i {
+                position: relative;
+                padding-right: 10px;
+            }
+
+            &:hover span {
+                text-decoration: underline;
+            }
+
+            &:hover i {
+                animation: right-left .5s linear infinite;
+            }
+        }
+
+
+    }
+
+    .login__container {
+        h2 {
+            @include margin-padding(0 0 40px 0, 0);
+        }
+
+        background-color: $gray;
+        padding: 50px 100px;
+    }
+
+    .checkbox {
+        @include flexbox(default, space-between);
+        margin-top: 20px;
+        gap: 10px;
+
+        &__container {
+            position: relative;
+            z-index: 1;
+        }
+
+        &__item {
+            @include setSize(190px, 160px);
+            @include flexbox(center, center, column);
+            border: 1px solid gray;
+            background: whitesmoke;
+            cursor: pointer;
+            position: relative;
+            border-radius: 5px;
+
+            &[data-selected="true"] * {
+                color: blue;
+            }
+
+            &[data-selected="true"] {
+                border: 1px solid blue;
+            }
+
+            * {
+                font-size: 1.2rem;
+            }
+
+            i {
+                font-size: 2.7rem;
+                margin-bottom: 15px;
+
+            }
+
+            &:focus-visible {
+                border: none;
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+                inset: -4px;
+                border-radius: 5px;
+                z-index: -1;
+                opacity: 0;
+                transition: opacity .3s ease-in-out;
+            }
+
+            &:focus::before {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.form__container {
+    margin-top: 40px;
+
+    a {
+        text-align: center;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+
+    .input {
+        background: none;
+        border: 0;
+        flex: 1;
+
+        &__container {
+            @include flexbox(center, default, default, 10px);
+            border: 1px solid black;
+            border-radius: 5px;
+            min-height: 40px;
+
+            i {
+                padding: 10px;
+                font-size: 1.3rem;
+            }
+
+            .fa-eye {
+                cursor: pointer;
+            }
+        }
+
+    }
+
+    .input:focus-visible {
+        outline: none;
+    }
+
+    .form__item {
+        @include flexbox(default, default, column, 10px);
+        margin-bottom: 20px;
+
+    }
+}
+
+.button--login {
+    @include margin-padding(0 0 20px 0, 10px);
+    width: 100%;
+    display: block;
+    background: blue;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+
+    &:focus-visible {
+        outline: none;
+    }
+}
+
+.messages {
+    @include flexbox(default, default, column);
+
+    &--container {
+        @include flexbox(default, space-around, column);
+        padding: 0 10px;
+        flex: 1;
+    }
+}
+
+.news {
+
+    & .new {
+        @include flexbox(default, default, default, 10px);
+        padding: 20px 0;
+        cursor: pointer;
+        border-bottom: 1px solid gray;
+
+        &:hover .new--title {
+            text-decoration: underline;
+        }
+
+        &--image {
+            width: 100px;
+        }
+
+        &--title {
+            padding: 0 10px;
+        }
+    }
+
+}
+
+.footer {
+
+    padding: 40px;
+    min-height: 100px;
+    background: $backgroundColor;
+    transition: background-color .3s ease-in-out;
+
+    .logo {
+        height: 80px;
+    }
+
+    * {
+        transition: all .3s ease-in-out;
+    }
+
+    &__container {
+        @include flexbox(default, center, default);
+    }
+
+    &__col {
+        flex: 1;
+    }
+}
+
+.footer__row {
+
+    display: flex;
+    height: 100%;
+
+    &--list {
+        @include flexbox(center, space-evenly, default, 12px);
+
+        list-style: none;
+        white-space: nowrap;
+    }
+
+    &--list-item:hover {
+        cursor: pointer;
+        text-decoration: underline;
+
+    }
+
+    &--social {
+        @include flexbox(center, flex-end, default, 1rem);
+
+        & i::before {
+            font-size: 2.3rem;
+        }
+
+        .fa-square-instagram:hover {
+            color: #E1306C;
+        }
+
+        .fa-square-facebook:hover {
+            color: #4267B2
+        }
+
+        .fa-envelope:hover {
+            color: #E47A2E;
+        }
+    }
+}
+
+.calendar {
+    &--week {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &--container {
+        padding: 0;
+    }
+
+    &--header {
+        @include flexbox(default, space-between);
+        padding: 5px 20px;
+        background-color: $gray;
+
+        .month-year {
+            font-size: 1.2rem;
+            padding: 15px 0;
+        }
+
+        i {
+            cursor: pointer;
+            @include flexbox(center, center);
+            width: 20px;
+        }
+
+        i:hover {
+            background-color: gray;
+        }
+    }
+
+    &--body {
+        padding: 0 20px;
+    }
+}
+
+.legend {
+    @include flexbox(center, default, default, 10px);
+    @include margin-padding(10px 0 0 0, 0 0 0 10px);
+    min-height: 50px;
+    background-color: $gray;
+    color: $textColor;
+
+    span {
+        @include setSize(10px);
+        display: inline-block;
+    }
+}
+
+.day {
+    height: 4rem;
+    flex: 1;
+    color: darken($gray, 60%);
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: antiquewhite;
+    }
+
+    &--events {
+        @include flexbox(default, center, default, 2px);
+    }
+
+    &--week {
+        color: $gray;
+        font-size: .7rem;
+    }
+
+    &--number {
+        font-size: 1.5rem;
+    }
+
+    &--other {
+        .day--number {
+            color: $gray;
+        }
+
+    }
+
+    &--today {
+        .day--number {
+            color: $textColor2;
+        }
+    }
+}
+
+.arrow {
+    position: absolute;
+    @include setSize(0);
+    top: -5px;
+    border-style: solid;
+    border-width: 0 5px 5px 5px;
+    border-color: transparent transparent $gray transparent;
+    transition: all 0.7s ease;
+}
+
+.details {
+    margin-top: 10px;
+    position: relative;
+    background-color: $gray;
+    cursor: default;
+    width: 100%;
+    border-radius: 5px;
+
+    &.in {
+        height: 4rem;
+        animation: fade-in-details .3s linear;
+
+    }
+
+    &.out {
+        height: 0;
+        animation: fade-out-details .3s linear;
+    }
+}
+
+.events {
+    @include flexbox(default, space-around, column);
+    padding: 0.3rem;
+    overflow: hidden;
+    color: $textColor;
+
+    span {
+        @include setSize(.6rem);
+        display: inline-block;
+    }
+
+    &--container {
+        height: 100%;
+        overflow-x: hidden;
+        @include flexbox(default, default, default, 5px);
+
+        &.in {
+            opacity: 1;
+            animation: fade-in-opacity .3s linear;
+        }
+
+        &.out {
+            opacity: 0;
+            animation: fade-out-opacity .3s linear;
+        }
+    }
+
+}
+
+@keyframes fade-out-details {
+    from {
+        height: 4rem;
+    }
+}
+
+@keyframes fade-in-details {
+    from {
+        height: 0;
+    }
+
+}
+
+@keyframes fade-out-opacity {
+    from {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in-opacity {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes right-left {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+
+
+@media (max-width: 600px) {
+
+    $normal: 14px;
+
+    * {
+        font-size: $normal;
+    }
+
+    .header {
+        height: 40px;
+    }
+
+    .main__container {
+        &--image {
+            background-position: center;
+        }
+
+        &--content {
+            grid-template-columns: 4fr 3fr;
+        }
+
+        &--item {
+            padding: 20px;
+
+            &.hints {
+                grid-column: 1/span 2;
+                grid-row: 3/span 1;
+            }
+        }
+    }
+
+    .logo {
+        height: 35px;
+    }
+
+    .footer {
+        padding: 8px 15px;
+        position: relative;
+
+        &__container {
+            flex-direction: column;
+            gap: 24px;
+        }
+
+    }
+
+    .footer__row {
+        justify-content: center;
+
+        &--list {
+            @include flexbox(default, center, column);
+            gap: 24px;
+        }
+
+        &--social {
+            @include absolute(-100%, auto, auto, 15px);
+            @include flexbox(default, flex-end, column);
+            z-index: 1;
+        }
+    }
+
+
+    .main__container--login {
+        .login__container {
+            background-color: aquamarine;
+            padding: 50px 100px;
+            width: 100vw;
+        }
+
+        .banner {
+            display: none;
+        }
+
+    }
+}
