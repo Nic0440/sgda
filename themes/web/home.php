@@ -1,4 +1,6 @@
-<?php $this->layout("_theme", ['title' => 'Página inicial']); ?>
+<?php $this->layout("_theme", ['title' => 'Página inicial']); 
+?>
+
 <div class="main__container main__container--main">
   <div class="main__container--filter"></div>
   <div class="main__container--image"></div>

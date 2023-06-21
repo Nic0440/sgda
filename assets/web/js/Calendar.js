@@ -112,7 +112,7 @@ class Calendar {
         document.querySelector(`.${domElement}`).appendChild(legend);
         this.addDetails();
     }
-    
+
     addDetails() {
         const days = document.querySelectorAll(".day");
         let handleDay = {};
@@ -229,5 +229,8 @@ let events = [
     }
 
 ];
-const cal03 = new Calendar(null, null, events);
-cal03.insertCalendarIntoDOM("js-calendar");
+const calendar = document.querySelector(".js-calendar");
+if (calendar) {
+    const cal03 = new Calendar(null, null, events);
+    cal03.insertCalendarIntoDOM("js-calendar");
+}
