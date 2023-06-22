@@ -1,14 +1,14 @@
 <?php
 //$this->layout("_theme", ['title' => 'Cadatro']);
 ?>
-<form class="form form--register" method="post">
+<form class="form form--register php-email-form" method="post">
    <h1>Cadastro</h1>
    <label for="email"></label>
-   <input class="input input--register" type="text" name="email" placeholder="Email" />
+   <input class="input input--register" type="text" name="name" placeholder="Name" />
       <label for="password"></label>
-      <input class="input--register" type="password" name="password" placeholder="Senha" />
+      <input class="input--register" type="email" name="email" placeholder="Email" />
       <label for="confirm"></label>
-      <input class="input--register" type="password" name="confirm" placeholder="Confirmar senha" />
+      <input class="input--register" type="password" name="password" placeholder="Senha" />
    <button type="submit">Enviar</button>
  </form>
 
