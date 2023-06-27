@@ -150,22 +150,35 @@ class Timetable {
 
     public function selectAll()
     {
-        $stm = Connect::getInstance()->query("
-            SELECT days.name AS day_name, classes.name AS class_name, classes.code AS class_cod, classrooms.sala AS classroom_name, 
-                   classrooms.bloco AS classroom_block, teachers.name AS teacher_name, subjects.name AS subject_name
-            FROM timetables
-            JOIN days ON timetables.idDay = days.id
-            JOIN classes ON timetables.idClass = classes.id
-            JOIN classrooms ON timetables.idClassroom = classrooms.id
-            JOIN teachers_subjects ON timetables.idTeacherSubject = teachers_subjects.id
-            JOIN teachers ON teachers_subjects.idTeacher = teachers.id
-            JOIN subjects ON teachers_subjects.idSubject = subjects.id;
-        ");
+        $stm = Connect::getInstance()->query("SELECT classroom_name, class_name, start_time, end_time, teacher_name, subject_name
+        FROM (
+            SELECT cr.name AS classroom_name, cls.name AS class_name, sch.start_time, sch.end_time, t.name AS teacher_name, sub.name AS subject_name, ROW_NUMBER() OVER (PARTITION BY sch.id % 6 ORDER BY tt.schedule_id) AS rn
+            FROM timetable AS tt
+            JOIN schedules AS sch ON tt.schedule_id = sch.id
+            JOIN subjects_teachers AS st ON tt.subject_teacher_id = st.id
+            JOIN teachers AS t ON st.teacher_id = t.id
+            JOIN subjects AS sub ON st.subject_id = sub.id
+            JOIN classrooms AS cr ON tt.classroom_id = cr.id
+            JOIN classes AS cls ON tt.class_id = cls.id
+        ) AS tt_ordered
+        ORDER BY tt_ordered.rn;");
     
         return $stm->fetchAll();
     }
-    public function selectByClass(string $data){
-        $query = "SELECT * FROM timetables JOIN classes ON timetables.idClass = classes.id WHERE classes.code = '$data';'";
+    public function selectByClass(string $category){
+        $query = "SELECT classroom_name, class_name, start_time, end_time, teacher_name, subject_name
+        FROM (
+            SELECT cr.name AS classroom_name, cls.name AS class_name, sch.start_time, sch.end_time, t.name AS teacher_name, sub.name AS subject_name, ROW_NUMBER() OVER (PARTITION BY sch.id % 6 ORDER BY tt.schedule_id) AS rn
+            FROM timetable AS tt
+            JOIN schedules AS sch ON tt.schedule_id = sch.id
+            JOIN subjects_teachers AS st ON tt.subject_teacher_id = st.id
+            JOIN teachers AS t ON st.teacher_id = t.id
+            JOIN subjects AS sub ON st.subject_id = sub.id
+            JOIN classrooms AS cr ON tt.classroom_id = cr.id
+            JOIN classes AS cls ON tt.class_id = cls.id
+            WHERE cls.name = '{$category}'
+        ) AS tt_ordered
+        ORDER BY tt_ordered.rn;";
     
             $stm = Connect::getInstance()->query($query);
             return $stm->fetchAll();

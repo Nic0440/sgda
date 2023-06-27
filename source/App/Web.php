@@ -5,6 +5,7 @@ namespace Source\App;
 use League\Plates\Engine;
 use Source\Models\User;
 use Source\Models\Faq;
+use Source\Models\Schedule;
 use Source\Models\Class_;
 use Source\Models\Calendar;
 use Source\Models\Timetable;
@@ -63,27 +64,36 @@ class Web
         ]);
     }
 
-    public function chart()
-    {
-        echo "Carrinho de compras";
-    }
+    // public function chart()
+    // {
+    //     echo "Carrinho de compras";
+    // }
 
     public function timetable(array $data): void
     {
-        $classes = new Class_();
         $timetables = new Timetable();
+        $schedule = new Schedule();
+
+
 
         if (!empty($data["turma"])) {
+            $shift = $data["turma"];
+            $txt = substr($shift, -2);
+            if ($txt === "am") {
+                $schedules = $schedule->selectByCategory("Morning");
+            }
+            if ($txt === "at") {
+                $schedules = $schedule->selectByCategory("Afternoon");
+            }
             echo $this->view->render("timetable", [
-                "timetable" => $timetables->selectAll(),
-                "class" => $timetables->selectByClass($data['turma']),
-                "classes" => $classes->selectAll()
+                "timetable" => $timetables->selectByClass($data['turma']),
+                "schedules" => $schedules
             ]);
             return;
         }
         echo $this->view->render("timetable", [
             "timetable" => $timetables->selectAll(),
-            "classes" => $classes->selectAll()
+            "schedules" => $schedule->selectByCategory("Morning")
         ]);
     }
 

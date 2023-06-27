@@ -80,4 +80,17 @@ class Schedule
 
         return $this;
     }
+    public function selectByCategory(string $category){
+        $query = "SELECT start_time, end_time FROM schedules AS sch
+            WHERE sch.shift = '{$category}';";
+    
+            $stm = Connect::getInstance()->query($query);
+            return $stm->fetchAll();
+    }
+    public function selectAll(string $category){
+        $query = "SELECT * FROM schedules;";
+    
+            $stm = Connect::getInstance()->query($query);
+            return $stm->fetchAll();
+    }
 }

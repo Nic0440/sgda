@@ -1,22 +1,13 @@
 <?php
-$this->layout("_theme", ['title' => 'Horários', 'timetable' => $timetable, 'classes' => $classes]);
-if (!empty($class)) {
-    foreach ($class as $row) {
-        var_dump($row);
+$this->layout("_theme", ['title' => 'Horários', 'timetable' => $timetable, 'schedules' => $schedules]);
+if (!empty($timetable)) {
+    foreach ($timetable as $row) {
+
+        //echo "<p>". $row->classroom_name . "<p>";
     }
 }
 ?>
 
-<!-- <div class="dropdown">
-    <button class="dropdown--button js-dropdown-btn">Dropdown <i class="fas fa-arrow-down"></i></button>
-    <div class="dropdown--content js-dropdown-btn-content">
-        <?php if (!empty($classes)) : ?>
-            <?php foreach ($classes as $row) : ?>
-                <div class="dropdown--option js-linkable" data-href="horarios/<?php echo $row->code; ?>"><?php echo $row->code; ?></div>
-            <?php endforeach; ?>
-        <?php endif; ?>
-    </div>
-</div> -->
 <div class="main__container main__container--timetable">
     <ul class="list--itens">
         <li class="list--item js-dropdwon">
@@ -42,5 +33,15 @@ if (!empty($class)) {
                         Aula</strong> </span><i class="fa-solid fa-angle-down"></i></div>
         </li>
     </ul>
-    <div class="timetable"></div>
+    <div class="timetable">
+        <?php if (!empty($schedules)) { ?>
+            <?php foreach ($schedules as $schedule) { ?>
+                <div class="schedule">
+                    <span class="start-time"><?php echo substr($schedule->start_time, 0, 5); ?></span> - 
+                    <span class="end-time"><?php echo substr($schedule->end_time, 0, 5); ?></span>
+                </div>
+            <?php } ?>
+        <?php } ?>
+    </div>
+
 </div>
