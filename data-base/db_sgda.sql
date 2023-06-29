@@ -276,6 +276,23 @@ INSERT INTO `timetable` (`id`, `class_id`, `classroom_id`, `day_week`, `subject_
 (30, 2, 5, 'Sex', 8, 6),
 (67, 1, 1, 'Seg', 1, 1),
 (68, 1, 1, 'Seg', 1, 2);
+--
+-- Estrutura da tabela `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 -- --------------------------------------------------------
 
