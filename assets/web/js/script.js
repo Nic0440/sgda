@@ -3,8 +3,6 @@ const body = document.querySelector(".js-body");
 const showPwd = document.querySelector(".js-show-password");
 const inputPwd = document.querySelector(".js-input-password");
 const roles = document.querySelectorAll(".js-checkbox");
-const btnLogin = document.querySelector(".js-button-login");
-//const form = document.querySelector(".js-form-login");
 const header = document.querySelector(".js-header");
 const lockItens = document.querySelectorAll(".js-item-lock");
 const toggleTheme = document.querySelector(".js-toggle-theme");
@@ -28,26 +26,6 @@ function scroll(item) {
             item.style.backgroundColor = "transparent";
         }
     });
-}
-
-function submit(btn) {
-    if (!form) {
-        return;
-    }
-    btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        const user = document.querySelector(".js-input-user").value;
-        const password = document.querySelector(".js-input-password").value;
-        if (user == "" || password == "") {
-            //console.log("Por favor, preencha todos os campos");
-        }
-        let userInfo = {
-            name: user,
-            password: password,
-            role: selectedRole
-        }
-        loginInfo.push(userInfo);
-    })
 }
 
 function roleSelector(roles) {
@@ -161,9 +139,6 @@ if (showPwd && inputPwd) {
 if (roles) {
     roleSelector(roles);
 }
-// if (btnLogin) {
-//     submit(btnLogin);
-// }
 if (header) {
     scroll(header);
 }

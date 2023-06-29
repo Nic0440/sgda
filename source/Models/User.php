@@ -4,18 +4,19 @@ namespace Source\Models;
 
 use Source\Core\Connect;
 
-class User {
+class User
+{
     private $name;
     private $email;
     private $password;
     private $address;
 
-    public function __construct (
+    public function __construct(
         $name = null,
         $email = null,
         $password = null,
         Address $address = null // Parametro novo
-    ){
+    ) {
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
@@ -69,15 +70,27 @@ class User {
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":email", $this->email);
-        $stmt->bindParam(":password",$this->password);
+        $stmt->bindParam(":password", $this->password);
         $stmt->execute();
     }
 
-    public function selectAll ()
+    public function selectAll()
     {
         $query = "SELECT * FROM users";
         $stmt = Connect::getInstance()->query($query);
         return $stmt->fetchAll();
     }
-
+    public function auth(String $email, String $password)
+    {
+        $sql = "SELECT password, email FROM users WHERE password = :password AND email = :email;";
+        $stmt = Connect::getInstance()->prepare($sql);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":password", $password);
+        $stmt->execute();
+        $row = $stmt->rowCount();
+        if ($row !== 0) {
+            return true;
+        }
+        return false;
+    }
 }
