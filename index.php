@@ -28,11 +28,12 @@ $route->get("/turmas", "Web:classes");
 $route->get("/cadastro", "Web:register");
 $route->get("/horarios/{turma}","Web:timetable");
 
-
 $route->get("/ops/{errcode}", "Web:error");
 
 $route->group("/app");
 $route->get("/", "App:home");
+$route->get("/perfil", "App:profile");
+
 
 $route->group(null);
 
