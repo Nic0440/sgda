@@ -12,8 +12,8 @@ $this->end();
 <div class="main__container main__container--login">
     <div class="main__container--content">
         <section class="banner">
-            <a href="<?= url(); ?>" class="anchor--none to-back">
-                <i class="fa-solid fa-arrow-left"></i><span>Voltar</span></a>
+            <a style="color:black" href="<?= url(); ?>" class="anchor--none to-back">
+                <i style="color:black" class="fa-solid fa-arrow-left"></i><span>Voltar</span></a>
         </section>
         <section class="login__container">
             <h2><i class="fa-solid fa-right-to-bracket"></i>Login</h2>
