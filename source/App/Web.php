@@ -103,7 +103,7 @@ class Web
     }
     public function login()
     {
-        echo $this->view->render("login", []);
+        echo $this->view->render("user-auth", []);
     }
     public function contact()
     {

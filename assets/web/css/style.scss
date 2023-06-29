@@ -171,6 +171,8 @@ ul {
 }
 
 .main__container {
+    margin-top: 65px;
+
     &--main {
         h2 {
             border-bottom: 1px solid gray;
@@ -277,9 +279,16 @@ ul {
     flex: 1;
     display: flex;
 
+    .timetable{
+        @include flexbox(default, default, column);
+    }
+    .schedule{
+        display: flex;
+        flex: 1;
+    }
+
     .list--itens {
         @include flexbox(default, default, column);
-        @include margin-padding(65px 0 0 0, 20px 0);
         background: var(--backgroundColor);
 
         .list__item--item {
@@ -312,7 +321,7 @@ ul {
             &--item {
                 padding: 10px 10px 10px 35px;
                 cursor: pointer;
-               
+
             }
         }
     }

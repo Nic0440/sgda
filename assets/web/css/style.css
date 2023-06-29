@@ -78,6 +78,7 @@ ul {
   position: fixed;
   padding: 0 40px;
   transition: height 0.3s ease-in-out;
+  z-index: 222;
   transition: background-color 0.3s ease-in-out;
 }
 
@@ -179,6 +180,9 @@ ul {
   transition: height 0.3s ease-in-out;
 }
 
+.main__container {
+  margin-top: 65px;
+}
 .main__container--main h2 {
   border-bottom: 1px solid gray;
   border-radius: 5px 5px 0 0;
@@ -268,13 +272,21 @@ ul {
   flex: 1;
   display: flex;
 }
+.main__container--timetable .timetable {
+  display: flex;
+  align-items: default;
+  justify-content: default;
+  flex-direction: column;
+}
+.main__container--timetable .schedule {
+  display: flex;
+  flex: 1;
+}
 .main__container--timetable .list--itens {
   display: flex;
   align-items: default;
   justify-content: default;
   flex-direction: column;
-  margin: 65px 0 0 0;
-  padding: 20px 0;
   background: var(--backgroundColor);
 }
 .main__container--timetable .list--itens .list__item--item {

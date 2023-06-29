@@ -59,3 +59,33 @@ $this->end();
         </section>
     </div>
 </div>
+<script type="text/javascript" async>
+    const url = `<?= url("api/user/login");?>`;
+    const form = document.querySelector(".js-form-login");
+
+    async function request (url, options) {
+        try {
+            const response = await fetch (url, options);
+            const data = await response.json();
+            return data;
+        } catch (err) {
+            console.error(err);
+            return {
+                type: "error",
+                message: err.message
+            };
+        }
+    }
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const options = {
+            method: 'POST',
+            body : formData
+        };
+        const resp = await request(url, options);
+        console.log(resp);
+    });
+
+</script>

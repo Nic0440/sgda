@@ -4,7 +4,7 @@ const showPwd = document.querySelector(".js-show-password");
 const inputPwd = document.querySelector(".js-input-password");
 const roles = document.querySelectorAll(".js-checkbox");
 const btnLogin = document.querySelector(".js-button-login");
-const form = document.querySelector(".js-form-login");
+//const form = document.querySelector(".js-form-login");
 const header = document.querySelector(".js-header");
 const lockItens = document.querySelectorAll(".js-item-lock");
 const toggleTheme = document.querySelector(".js-toggle-theme");
@@ -161,9 +161,9 @@ if (showPwd && inputPwd) {
 if (roles) {
     roleSelector(roles);
 }
-if (btnLogin) {
-    submit(btnLogin);
-}
+// if (btnLogin) {
+//     submit(btnLogin);
+// }
 if (header) {
     scroll(header);
 }
