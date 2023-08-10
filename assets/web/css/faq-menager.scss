@@ -1,0 +1,366 @@
+@import 'utils';
+
+.faq-menager {
+
+    &__header h1 {
+        padding-bottom: 0;
+    }
+
+    &__header,
+    &__content {
+        width: 100%;
+    }
+
+    &__content {
+        padding: 0 3.2rem 3rem 3.2rem;
+    }
+
+    i:not(.fa-circle-exclamation) {
+        cursor: pointer;
+    }
+
+    .questions-container {
+        border-radius: 5px;
+    }
+
+    &__actions {
+        @include flexbox($gap: 1rem);
+        @include custom-border($br-t-l: 5px, $br-t-r: 5px);
+        padding: 1rem;
+    }
+
+    &__row {
+
+        .fa-pen-to-square:hover {
+
+            color: #3D49B3;
+
+        }
+
+        &,
+        &--actions {
+
+            @include flexbox($direction: row, $align-items: center, $gap: 1rem);
+            height: 4rem;
+            padding-right: 1rem;
+
+        }
+
+        &:not(.fa-circle-exclamation),
+        & i:not(.fa-circle-exclamation) {
+            color: var(--font-secundary-color);
+        }
+
+        &:last-child {
+            @include custom-border($br-b-l: 5px, $br-b-r: 5px);
+        }
+
+        &--actions {
+            @include custom-font($size: $md, $spacing: .8px, $weight: 600, $align: start, $color: var(--font-secundary-color));
+            border-top: .4px solid var(--line);
+        }
+
+    }
+
+    &__row:nth-child(even) {
+
+        background-color: lighten(gray, 35%);
+
+    }
+
+    &__row[aria-selected="true"] {
+
+        background-color: #AFA7E7;
+
+    }
+
+    &__cell {
+        flex: 3;
+
+        &:first-child,
+        &:nth-child(6) {
+            flex: 1;
+        }
+
+        &:nth-child(6),
+        &:first-child {
+            text-align: -webkit-center;
+        }
+
+    }
+
+}
+
+.question-del {
+    &[aria-expanded="true"] {
+        display: block;
+    }
+
+    h2 {
+        @include custom-font($color: var(--font-secundary-color), $spacing: 1px);
+        color: var(--font-secundary-color);
+    }
+
+    h3 {
+        font-weight: 100;
+    }
+
+    @include custom-offset-values($position: fixed, $inset: 0, $margin: auto, $z-index: 70);
+    @include custom-size($width: 500px, $height: fit-content);
+    @include custom-font($align: center, $color: var(--font-color-iii));
+    background-color: var(--bg-main-color);
+    border-radius: 5px;
+
+    &__header {
+        @include flexbox($align-items: center, $justify-content: center);
+        @include custom-color($background: $red, $color: #E2E8CE);
+        @include custom-border($radius: 5px, $br-b-l: 8px, $br-b-r: 8px);
+        padding: 1rem 0;
+        font-size: 5rem;
+    }
+
+    form {
+        padding: 2rem 2.2rem;
+        @include flexbox($direction: column, $align-items: center, $gap: 1rem, $justify-content: space-between);
+        height: 200px;
+    }
+
+    .action-buttons {
+        @include flexbox($justify-content: space-between);
+        width: 100%;
+    }
+
+}
+
+body[aria-hidden="false"] .question {
+
+    &[aria-expanded="true"] {
+        @include flexbox($direction: column);
+    }
+
+    @include custom-offset-values($position: fixed, $inset: 0, $margin: auto, $z-index: 70);
+    @include custom-size($width: 700px, $height: 500px);
+
+    .fa-x {
+        padding-left: 9px;
+        color: var(--font-secundary-color);
+    }
+
+    form {
+        @include flexbox($direction: column);
+        @include custom-size($width: 100%, $height: 100%);
+    }
+
+    .button__container {
+        @include flexbox($align-items: center, $justify-content: flex-end, $flex: 1);
+        margin-top: 1rem;
+        width: 100%;
+
+        .checkbox-custom {
+            @include custom-size($width: 1.4rem, $height: 1.4rem);
+        }
+    }
+
+    .input__container {
+
+        background-color: var(--font-color);
+        width: 100%;
+
+        input:not([type="checkbox"]),
+        .label--question,
+        textarea,
+        textarea::placeholder {
+            @include custom-font($color: var(--font-secundary-color), $size: 1.2rem, $align: start);
+        }
+
+        .label--question,
+        textarea::placeholder {
+            opacity: .5;
+        }
+
+        &:not(.input__container--checkbox) {
+            @include custom-border($border: .4px solid var(--line), $radius: 5px);
+        }
+
+        &.error {
+            border-color: var(--error);
+        }
+
+        &--title,
+        textarea {
+            padding: .5rem .8rem;
+        }
+
+        &--title {
+            @include flexbox($gap: .2rem);
+            width: 100%;
+            margin-bottom: 1rem;
+
+            input {
+                flex: 1;
+            }
+
+            label {
+                @include custom-font($weight: 500, $color: lighten(gray, 5%));
+            }
+        }
+
+        &--textarea {
+            @include flexbox($direction: column, $flex: 1);
+
+            textarea {
+                width: 100%;
+                flex: 1;
+                resize: none;
+            }
+        }
+
+        &--checkbox {
+            @include flexbox($justify-content: flex-start);
+        }
+
+    }
+
+    .settings__container {
+        display: flex;
+        width: 100%;
+
+        .input__container {
+            padding: 0;
+            flex: 2;
+            background-color: transparent;
+            border: 0;
+
+
+            input[type="checkbox"]:checked+.checkbox-custom {
+                @include custom-color($background: #0691a0, $border: #0691a0);
+
+                i {
+                    color: #f0ffff;
+                }
+            }
+
+            label {
+                margin-top: .5rem;
+                @include flexbox($align-items: center, $gap: 1rem);
+
+                i {
+                    line-height: 4;
+                }
+
+                p {
+                    color: var(--font-secundary-color);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .text-settings {
+        @include flexbox($align-items: center);
+        @include custom-border($br-t-l: 5px, $br-t-r: 5px);
+        @include custom-size($height: 3rem, $width: 100%);
+        background-color: rgb(185, 232, 253);
+
+        i {
+            color: black;
+        }
+
+        button {
+            height: 100%;
+            aspect-ratio: 1 / 1;
+            padding: 0 1rem;
+
+            &:first-child {
+                border-top-left-radius: 5px;
+            }
+
+            &:hover {
+
+                background-color: darken(rgb(100, 204, 252), 5%);
+            }
+        }
+    }
+
+    &__item,
+    &__header {
+        @include flexbox($justify-content: space-between);
+        background-color: $light-gray;
+        width: 100%;
+        padding: 2.2rem 2rem;
+    }
+
+    &__item {
+        background-color: #E2E8CE;
+        flex: 1;
+    }
+
+    &__header {
+        padding: 1.2rem 2rem;
+        align-items: center;
+        @include custom-font($size: $md, $weight: 600);
+        @include custom-border($br-t-l: 5px, $br-t-r: 5px);
+        color: var(--font-secundary-color);
+
+    }
+
+}
+
+.theme.dark .faq-menager__content {
+
+    .message--error {
+        color: $lightRed;
+    }
+
+    .question__header {
+
+        background-color: #242424;
+    }
+
+    .question__editor {
+
+        background-color: #363636;
+    }
+
+    .input__container {
+        background-color: rgb(66, 66, 66);
+
+    }
+
+    .questions-container {
+        background-color: var(--dark-gray);
+    }
+
+    .fa-pen-to-square:hover {
+        color: #AFA7E7;
+
+    }
+
+    .faq-menager__row:nth-child(even) {
+        background-color: darken(gray, 20%);
+
+    }
+
+    .faq-menager__row[aria-selected="true"] {
+
+        &,
+        i:not(.fa-circle-exclamation) {
+            color: var(--dark-gray);
+        }
+
+        background-color: #AFA7E7;
+
+        .checkbox-custom {
+            border-color: var(--dark-gray);
+        }
+
+        .fa-pen-to-square:hover {
+
+            color: var(--primary-color);
+
+        }
+
+    }
+
+
+}

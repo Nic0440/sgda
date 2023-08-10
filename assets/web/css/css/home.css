@@ -1,0 +1,72 @@
+.introduction {
+  min-height: 95vh;
+}
+.introduction .dancing-script {
+  font-family: "Dancing Script", cursive;
+  color: var(--title-color);
+}
+.introduction .thmor {
+  font-family: "Kdam Thmor Pro", sans-serif;
+}
+.introduction .mono {
+  font-family: "VT323", monospace;
+}
+.introduction__buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+  flex-wrap: auto;
+  padding-top: 36px;
+}
+.introduction__item:last-child {
+  position: relative;
+}
+.introduction__img--amorph1, .introduction__img--amorph2 {
+  position: absolute;
+  z-index: 0;
+}
+.introduction__img--amorph1 {
+  inset: -295px 0 0 -16px;
+}
+.introduction__img--amorph2 {
+  height: 350px;
+  inset: -60px 0px 0px 284px;
+}
+.introduction__img--3d {
+  position: absolute;
+  left: auto;
+  right: auto;
+  top: auto;
+  bottom: auto;
+  margin: auto;
+  inset: 0;
+  z-index: 1;
+  height: 498px;
+}
+
+.banner {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: auto;
+}
+.banner__item {
+  flex: 1;
+}
+.banner__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0;
+  flex-wrap: auto;
+  font-size: 1.2rem;
+  font-style: normal;
+  color: var(--font-secundary-color);
+  text-decoration: none;
+  text-align: justify;
+}/*# sourceMappingURL=home.css.map */

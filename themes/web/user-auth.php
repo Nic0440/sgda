@@ -1,71 +1,42 @@
 <?php
+
 $this->layout("_theme", ['title' => 'Login']);
-?>
 
+?>
 <?php
-$this->start("no-header");
+$this->start("alternative-header-I");
 ?>
-
+<nav class="navbar">
+    <div class="col"></div>
+    <div class="col">
+        <a class="navbar--link" href="<?= url("/"); ?>">Página inicial</a>
+    </div>
+    <div class="col"></div>
+</nav>
 <?php
 $this->end();
 ?>
-<div class="main__container main__container--login">
-    <div class="main__container--content">
-        <section class="banner">
-            <a style="color:black" href="<?= url(); ?>" class="anchor--none to-back">
-                <i style="color:black" class="fa-solid fa-arrow-left"></i><span>Voltar</span></a>
-        </section>
-        <section class="login__container">
-            <h2><i class="fa-solid fa-right-to-bracket"></i>Login</h2>
-            <div class="checkbox__container">
-                <h1>Por favor, selecione sua ocupação.</h1>
-                <div class="checkbox">
-                    <button class="checkbox__item checkbox__item--student js-checkbox" data-role="student" data-selected="true">
-                        <i class="fa-solid fa-user-graduate"></i>
-                        <p>Estudante</p>
-                    </button>
-                    <button class="checkbox__item checkbox__item--relative js-checkbox" data-role="relative" data-selected="false">
-                        <i class="fa-solid fa-user-group"></i>
-                        <p>Responsável</p>
-                    </button>
-                    <button class="checkbox__item checkbox__item--teacher js-checkbox js-teacher" data-role="teacher" data-selected="false">
-                        <i class="fa-solid fa-chalkboard-user"></i>
-                        <p>Professor</p>
-                    </button>
-                </div>
-                <div class="form__container">
-                    <form class="form js-form-login" method="post" action="">
-                        <div class="form__item form__item--user">
-                            <label for="user">EMAIL</label>
-                            <div class="input__container">
-                                <i class="fa-solid fa-envelope"></i>
-                                <input class="input input--user js-input-user" name="user" type="text" placeholder="Digite seu email">
-                            </div>
-                        </div>
-                        <div class="form__item form__item--password">
-                            <label for="password">SENHA</label>
-                            <div class="input__container">
-                                <i class="fa-solid fa-lock"></i>
-                                <input class="input input--password js-input-password" name="password" type="password" placeholder="Digite sua senha">
-                                <i class="fa-solid fa-eye js-show-password"></i>
-                            </div>
-                        </div>
 
-                        <button type="submit" class="button button--login js-button-login">Log In</button>
-                    </form>
-                    <a class="anchor--none" href="#">Esqueci minha senha.</a>
-                </div>
-            </div>
-        </section>
-    </div>
+<div class="main--login">
+    <form action="" method="post" class="js-form-login">
+        <h1>Login <span><?= $userType; ?></span></h1>
+        <label for="email">Email</label>
+        <input id="email" placeholder="Endereço de email" type="email" name="user">
+        <label for="Senha">Senha</label>
+        <input id="Senha" placeholder="Senha" type="password" name="password">
+        <button>Entrar</button>
+    </form>
+    <div class="message js-log-message"></div>
 </div>
-<script type="text/javascript" async>
-    const url = `<?= url("api/user/login");?>`;
-    const form = document.querySelector(".js-form-login");
 
-    async function request (url, options) {
+<script type="text/javascript" async>
+    const url = `<?= url("api/user/login"); ?>`;
+    const form = document.querySelector(".js-form-login");
+    const message = document.querySelector(".js-log-message");
+
+    async function request(url, options) {
         try {
-            const response = await fetch (url, options);
+            const response = await fetch(url, options);
             const data = await response.json();
             return data;
         } catch (err) {
@@ -79,13 +50,23 @@ $this->end();
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
+
         const formData = new FormData(form);
+        formData.append('idCategory', '<?= $idCategory; ?>');
         const options = {
-            method: 'POST',
-            body : formData
+            method: 'post',
+            body: formData
         };
         const resp = await request(url, options);
-        console.log(resp);
+        if (resp.type === 'error') {
+            message.textContent = "Usuário não encontrado";
+        }
+        if (resp.type === 'success') {
+            message.textContent = "Login realizado com sucesso";
+            window.location.href = `<?= url("/app");?>`;
+        }
+        setTimeout(() => {
+                message.textContent = " ";
+            }, 2000);
     });
-
 </script>

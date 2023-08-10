@@ -2,7 +2,9 @@
 
 namespace Source\App\Api;
 
+use CoffeeCode\Router\Router;
 use Source\Models\User;
+use Source\Models\UserCategory;
 
 class Users extends Api
 {
@@ -24,16 +26,20 @@ class Users extends Api
 
     public function create(array $data): void
     {
-        //echo json_encode($data);
 
         if (!empty($data)) {
-            $user = new User($data["name"], $data["email"], $data["password"]);
+            $user = new User($data["name"], $data["email"], $data["password"], $data["idCategory"]);
+
             $user->insert();
+
+            $userCategory = new UserCategory();
             http_response_code(200);
             $response["user"] = [
                 "name" => $user->getName(),
-                "email" => $user->getEmail()
+                "email" => $user->getEmail(),
+                "category" => $userCategory->selectNameById($data['idCategory'])
             ];
+
             echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             return;
         }
@@ -50,7 +56,7 @@ class Users extends Api
     {
 
         $user = new User();
-        $auth = $user->auth($data['user'], $data['password']);
+        $auth = $user->auth($data['user'], $data['password'], $data['idCategory']);
         if ($auth) {
             $response = [
                 "type" => "success",
@@ -59,6 +65,7 @@ class Users extends Api
 
             http_response_code(200);
             echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+
             return;
         }
         $response = [

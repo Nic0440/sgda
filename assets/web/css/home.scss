@@ -1,0 +1,66 @@
+@import 'utils';
+
+.introduction {
+ 
+    min-height: 95vh;
+
+    .dancing-script {
+        font-family: 'Dancing Script', cursive;
+        color: var(--title-color);
+    }
+
+    .thmor {
+        font-family: 'Kdam Thmor Pro', sans-serif;
+    }
+
+    .mono {
+        font-family: 'VT323', monospace;
+    }
+
+    &__buttons-container {
+        @include flexbox($justify-content: center, $gap: 3rem);
+        padding-top: 36px;
+    }
+
+    &__item:last-child {
+        position: relative;
+    }
+
+    &__img {
+
+        &--amorph1,
+        &--amorph2 {
+            position: absolute;
+            z-index: 0;
+        }
+
+        &--amorph1 {
+            inset: -295px 0 0 -16px;
+        }
+
+        &--amorph2 {
+            height: 350px;
+            inset: -60px 0px 0px 284px;
+        }
+
+        &--3d {
+            @include custom-offset-values($inset: 0, $z-index: 1);
+            height: 498px;
+        }
+    }
+
+}
+
+.banner {
+    @include flexbox($align-items: center, $gap: 2rem);
+
+    &__item {
+        flex: 1;
+    }
+
+    &__content {
+
+        @include flexbox($direction: column, $justify-content: space-between, $align-items: center);
+        @include custom-font($size: 1.2rem, $align: justify, $color: var(--font-secundary-color));
+    }
+}

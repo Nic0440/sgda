@@ -1,0 +1,28 @@
+@import 'utils';
+
+.faq{
+    
+    h1 {
+        color: var(--font-secundary-color);
+    }
+
+    &-header {
+        height: 85vh;
+        background-color: var(--bg-secundary-main-color);
+
+        &__item {
+            @include flexbox($direction: column, $align-items: center);
+        }
+
+        &__img {
+            height: 35rem;
+        }
+    }
+
+    &-content {
+        &__container {
+            width: 100%;
+            @include flexbox($justify-content: center);
+        }
+    }
+}

@@ -9,6 +9,8 @@ use Source\Models\Schedule;
 use Source\Models\Class_;
 use Source\Models\Calendar;
 use Source\Models\Timetable;
+use Source\Models\UserCategory;
+use CoffeeCode\Router\Router;
 
 class Web
 {
@@ -40,8 +42,15 @@ class Web
     {
         echo $this->view->render("about", []);
     }
+    public function model()
+    {
+        echo $this->view->render("model", []);
+    }
 
-
+    public function add_account()
+    {
+        echo $this->view->render("add-account", []);
+    }
     public function location()
     {
         $name = "Fábio Santos";
@@ -59,9 +68,12 @@ class Web
     public function faq()
     {
         $faqs = new Faq();
-        echo $this->view->render("faq", [
-            "faqs" => $faqs->selectAll()
-        ]);
+        echo $this->view->render("faq", []);
+    }
+    public function faq_menager()
+    {
+        
+        echo $this->view->render("faq-menager", []);
     }
 
     // public function chart()
@@ -73,8 +85,6 @@ class Web
     {
         $timetables = new Timetable();
         $schedule = new Schedule();
-
-
 
         if (!empty($data["turma"])) {
             $shift = $data["turma"];
@@ -101,9 +111,21 @@ class Web
     {
         var_dump($data);
     }
-    public function login()
+
+    public function login(array $data): void
     {
-        echo $this->view->render("user-auth", []);
+        if ($data['user-type'] == "administrador" || $data['user-type'] == "estudante" || $data['user-type'] == "professor") {
+            $userCategory = new UserCategory();
+            $idCategory = $userCategory->selectIdByName($data['user-type']);
+            echo $this->view->render("user-auth", [
+                "userType" => $data['user-type'],
+                "idCategory" => $idCategory[0]->id
+            ]);
+            return;
+        }
+        $route = new Router(url(), ":");
+        $route->error();
+        $route->redirect("/ops/{$route->error()}");
     }
     public function contact()
     {

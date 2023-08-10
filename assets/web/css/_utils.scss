@@ -1,0 +1,127 @@
+//Font sizes
+$normal: 1rem;
+$md: 1.2rem;
+$lg: 3rem;
+
+//Font colors
+$light-gray: lighten(gray, 35%);
+$red: #b94143;
+$lightRed: #DD8892;
+
+@mixin custom-color($border: null, $background: null, $color: null) {
+    border-color: $border;
+    background-color: $background;
+    color: $color;
+}
+
+@mixin flexbox($direction: row, $justify-content: flex-start, $align-items: flex-start, $gap: 0, $align-content: null, $wrap: auto, $flex: null) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify-content;
+    align-items: $align-items;
+    gap: $gap;
+    flex-wrap: $wrap;
+
+    @if $align-content !=null {
+        justify-content: $align-content;
+        align-items: $align-content;
+    }
+
+    @if $flex !=null {
+        flex: $flex;
+    }
+}
+
+@mixin custom-font($size: auto, $style: normal, $color: black, $decoration: none, $align: center, $weight: null, $spacing: null) {
+    font-size: $size;
+    font-style: $style;
+    color: $color;
+    text-decoration: $decoration;
+    text-align: $align;
+
+    @if $weight !=null {
+        font-weight: $weight;
+    }
+
+    @if $spacing !=null {
+        letter-spacing: $spacing;
+    }
+}
+
+@mixin custom-size($width: auto, $height: auto, $minh: auto) {
+    width: $width;
+    height: $height;
+    min-height: $minh;
+}
+
+@mixin custom-offset-values($position: absolute, $l: auto, $r: auto, $t: auto, $b: auto, $margin: auto, $inset: null, $z-index: null) {
+    position: $position;
+    left: $l;
+    right: $r;
+    top: $t;
+    bottom: $b;
+    margin: $margin;
+    inset: $inset;
+    z-index: $z-index;
+}
+
+@mixin custom-border($radius: null,
+    $border: null,
+    $color: null,
+    $style: null,
+    $bt: null,
+    $br: null,
+    $bb: null,
+    $bl: null,
+    $br-t-l: null,
+    $br-t-r: null,
+    $br-b-r: null,
+    $br-b-l: null) {
+    @if $color !=null {
+        border-color: $color;
+    }
+
+    @if $style !=null {
+        border-style: $style;
+    }
+
+    @if $border !=null {
+        border: $border;
+    }
+
+    @if $bt !=null {
+        border-top-width: $bt;
+    }
+
+    @if $br !=null {
+        border-right-width: $br;
+    }
+
+    @if $bb !=null {
+        border-bottom-width: $bb;
+    }
+
+    @if $bl !=null {
+        border-left-width: $bl;
+    }
+
+    @if $radius !=null {
+        border-radius: $radius;
+    }
+
+    @if $br-t-l !=null {
+        border-top-left-radius: $br-t-l;
+    }
+
+    @if $br-t-r !=null {
+        border-top-right-radius: $br-t-r;
+    }
+
+    @if $br-b-r !=null {
+        border-bottom-right-radius: $br-b-r;
+    }
+
+    @if $br-b-l !=null {
+        border-bottom-left-radius: $br-b-l;
+    }
+}

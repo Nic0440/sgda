@@ -3,137 +3,152 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= url("assets/web/css/style.css"); ?>">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Jost&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Jost&family=Kdam+Thmor+Pro&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= url("assets/web/css/css/style.css"); ?>">
+    <link rel="stylesheet" href="<?= url("assets/web/css/css/home.css"); ?>">
+    <link rel="stylesheet" href="<?= url("assets/web/css/css/faq.css"); ?>">
+    <link rel="stylesheet" href="<?= url("assets/web/css/css/faq-menager.css"); ?>">
     <title><?= $this->e($title) ?></title>
+
 </head>
 
-<body class="default-theme">
-    <div class="body-container js-body">
-        <?php
-        $this->start("header");
-        ?>
-        <div class="message-login">
-            <i class='fa-solid fa-x js-icon-cancel'></i>
-            <span>Para acessar essa funcionalidade é necessário realizar o login.</span>
-            <button class="button button--login"><a href="<?= url("login"); ?>" class="anchor--none">Fazer login</a></button>
+<body class="theme default js-cover-screen" aria-hidden="true">
+    <header id="header" class="header">
+        <div class="header__item">
+            <i class="fa-solid fa-phone fa-lg"></i>
+            <a class="link--contact" href="tel:+55555555555">(+55) 55 5555-5555</a>
+
+        </div>
+        <button class="button--no-style js-toggle-theme"><i class="fa-solid fa-circle-half-stroke fa-lg js-toggle-theme"></i></button>
+
+    </header>
+    <nav id="navbar" class="navbar">
+        <a href="<?= url('/'); ?>" class="navbar__item">
+            <img src="<?= url("/assets/web/imgs/brand_dark.png") ?>" alt="Logotipo" class="brand" height="50" title="Página inicial">
+        </a>
+        <ul class="navbar-list navbar__item list--no-style">
+            <li class="navbar-list__item"><a class="link--navbar" href="#">Horários</a></li>
+            <li class="navbar-list__item"><a class="link--navbar" href="#">Calendário acadêmico</a></li>
+            <li class="navbar-list__item"><a class="link--navbar" href="#">Sobre nós</a></li>
+            <li class="navbar-list__item"><a class="link--navbar" href="<?= url("faq"); ?>">FAQs</a></li>
+            <li class="navbar-list__item"><a class="link--navbar" href="#">Contato</a></li>
+        </ul>
+        <div class="navbar__item">
+            <a tabindex="-1" href="#">
+                <button name="login_page" type="button" class="button button--navbar button--bg-dark-purple">Entrar</button>
+            </a>
         </div>
 
-        <header class="header header--main js-header">
-            <nav class="navbar navbar__container">
-                <a href="<?= url();?>" class="navbar navbar__group anchor--none">
-                    <img src="<?= url("assets/web/imgs/sgda.png"); ?>" alt="Logo" class="logo">
-                </a>
-                <div class="navbar navbar__group">
-                    <div class="navbar navbar__cell"><span>Ensino</span>
-                        <ul class="navbar__cell--menu">
-                            <li>
-                                <ul class="list--item">
-                                    <li><a class="anchor--none" href="<?= url("horarios");?>"><i class="fa-solid fa-clock"></i>Horários</a>
-                                    </li>
-                                    <li><a class="anchor--none" href="#"><i class="fa-solid fa-person-chalkboard"></i>Professores</a>
-                                    </li>
-                                    <li><a class="anchor--none" href="#"><i class="fa-solid fa-book"></i>Disciplinas</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <ul class="list--item">
-                                    <li><a class="anchor--none" href="#"><i class="fa-solid fa-chalkboard-user"></i>Turmas</a></li>
-                                    <li><a class="anchor--none" href="#"><i class="fa-solid fa-school"></i>Campûs</a>
-                                    </li>
-                                    <li><a class="anchor--none" href="#"><i class="fa-solid fa-calendar"></i>Calendário</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <ul class="list--item">
-
-                                    <li><a class="anchor--none js-item-lock" href="#"><i class="fa-solid fa-briefcase"></i>Estágios</a>
-                                    </li>
-                                    <li><a class="anchor--none js-item-lock" href="#"><i class="fa-solid fa-file-lines"></i>Avaliações</a>
-                                    </li>
-                                    <li><a class="anchor--none js-item-lock" href="#"><i class="fa-solid fa-table"></i>Boletim</a></li>
-
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="navbar navbar__cell"><span>Documentação</span>
-                        <ul class="navbar__cell--menu">
-                            <ul class="list--item">
-                                <li><a class="anchor--none" href="#"><i class="fa-solid fa-file"></i>Planos de
-                                        ensino</a></li>
-                                <li><a class="anchor--none" href="#"><i class="fa-solid fa-certificate"></i>Diplomas e
-                                        Certificações</a>
-                                </li>
-                                <li><a class="anchor--none js-item-lock" href="#"><i class="fa-solid fa-file"></i>Documentos</a>
-                                </li>
-                            </ul>
-                        </ul>
-                    </div>
-                    <a class="anchor--none navbar navbar__cell" href="/"><span>Contato</span></a>
-                </div>
-                <div class="navbar navbar navbar__group navbar__group--right">
-                    <a class="anchor--none navbar navbar__cell" href="<?= url("login");?>">Login</a>
-                    <i class="fa-solid fa-circle-half-stroke js-toggle-theme"></i>
-                </div>
-            </nav>
-        </header>
-        <?php
-        $this->end();
-        ?>
+    </nav>
+    <main id="main" class="main">
 
         <?php
-        if ($this->section("no-header")) {
-            echo "";
-        } else {
-            echo $this->section("header");
-        }
+        echo $this->section("content");
         ?>
 
-        <main class="main">
-            <?= $this->section('content'); ?>
-        </main>
-        <footer class="footer">
-            <div class="footer__container">
-                <div class="footer__col">
-                    <div class="footer__row">
-                        <a href="/" class="navbar navbar__group anchor--none">
-                            <img src="./imgs/sgda.png" alt="Logo" class="navbar__cell logo">
-                        </a>
-                    </div>
-                </div>
-                <div class="footer__col">
-                    <div class="footer__row footer__row--list">
-                        <a href="/" class="anchor--none footer__row--list-item"><b>Sobre nós</b></a>
-                        <a href="/" class="anchor--none footer__row--list-item"><b>Nos contate</b></a>
-                        <a href="/" class="anchor--none footer__row--list-item"><b>Termos e licenças</b></a>
-                    </div>
-                </div>
+    </main>
 
-                <div class="footer__col">
-                    <div class="footer__row footer__row--social">
-                        <a href="/" class="anchor--none footer__row--social-item">
-                            <i class="fa-brands fa-square-instagram"></i>
-                        </a>
-                        <a href="/" class="anchor--none footer__row--social-item">
-                            <i class="fa-brands fa-square-facebook"></i>
-                        </a>
-                        <a href="/" class="anchor--none footer__row--social-item">
-                            <i class="fa-solid fa-envelope"></i>
-                        </a>
-                    </div>
+    <footer id="footer" class="footer">
+        <div class="footer-container">
+            <div class="footer-container__item footer-item">
+                <div class="footer-item__item">
+                    <a href="<?= url('/'); ?>" class="navbar__item">
+                        <img src="<?= url("/assets/web/imgs/title.png") ?>" alt="Logotipo" class="brand" height="80" title="Página inicial">
+                    </a>
+                    <p>Sistema de Gerenciamento de Dados Acadêmicos</p>
                 </div>
-        </footer>
-    </div>
-    
-    <script src="<?= url("assets/web/js/script.js"); ?>" async></script>
+                <div class="footer-item__item">
+                    <h2>Sobre nós</h2>
+                    <p>Nós somos uma plataforma focada em agilizar e facilitar a gestão de dados de instituições de ensino.</p>
+                </div>
+                <div class="footer-item__item">
+                    <h3>Nos contate</h3>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-phone fa-lg"></i>
+                        <a class="link--contact" href="tel:+55555555555">(+55) 55 5555-5555</a>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-envelope fa-lg"></i>
+                        <a class="link--contact" href="mailto:sgda_team@gmail.com">sgda_team@gmail.com</a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="footer-container__item">
+                <div class="footer-item__item">
+                    <h2>Informações</h2>
+                    <ul class="footer__list list--no-style">
+                        <li><a class="link--footer" href="">Sobre nós</a></li>
+                        <li><a class="link--footer" href="">Nos contate</a></li>
+                        <li><a class="link--footer" href="<?= url("faq"); ?>">Perguntas frequentes</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-container__item">
+                <div class="footer-item__item">
+                    <h2>Links úteis</h2>
+                    <ul class="footer__list list--no-style">
+                        <li><a class="link--footer" href="">Serviços</a></li>
+                        <li><a class="link--footer" href="">Suporte</a></li>
+                        <li><a class="link--footer" href="">Termos e condições</a></li>
+                        <li><a class="link--footer" href="">Política de privacidade</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-container__item">
+                <form id="update-form" action="" class="js-form-update" novalidate>
+                    <label for="email">Matenha-se atualizado</label>
+                    <div class="input-container">
+                        <input type="email" id="email" name="email" placeholder="Insira seu email">
+                        <button name="submit_form" class="button button--footer button--bg-purple" type="buttton"><i class="fa-solid fa-paper-plane fa-xl"></i></button>
+                    </div>
+                    <div class="social-media__list">
+                        <div class="social-media__item">
+                            <a class="link--social" href="">
+                                <i class="fa-brands fa-instagram fa-xl"></i></a>
+                        </div>
+                        <div class="social-media__item">
+                            <a class="link--social" href="">
+                                <i class="fa-brands fa-facebook-f fa-xl"></i></a>
+                        </div>
+                        <div class="social-media__item">
+                            <a class="link--social" href="">
+                                <i class="fa-brands fa-google-play fa-xl"></i></a>
+                        </div>
+                    </div>
+                </form>
+                <a class="link--to-top" href="#top"> <i class="fa-solid fa-chevron-up fa-lg"></i> </a>
+            </div>
+        </div>
+        <div class="footer-container">
+            <p>&copy; 2023 Sistema de Gerenciamento de Dados Acadêmicos - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
     <script src="https://kit.fontawesome.com/82f9eb0794.js" crossorigin="anonymous" async></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.js"
-        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous" async></script>
-    <script src="<?= url("assets/web/js/Calendar.js"); ?>" async></script>
+    <script src="<?= url("/assets/web/js/functions.js"); ?>" async></script>
+    <script asycn>
+        const cover = document.querySelector(".js-cover-screen");
+        const theme = document.querySelector(".theme");
+        const toggleTheme = document.querySelector(".js-toggle-theme");
+
+        toggleTheme.addEventListener("click", () => {
+            if (theme.classList.contains("default")) {
+                theme.classList.replace("default", "dark");
+                return;
+            }
+            if (theme.classList.contains("dark")) {
+                theme.classList.replace("dark", "default");
+                return;
+            }
+        })
+    </script>
 </body>
 
 </html>

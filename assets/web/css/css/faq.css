@@ -1,0 +1,27 @@
+.faq h1 {
+  color: var(--font-secundary-color);
+}
+.faq-header {
+  height: 85vh;
+  background-color: var(--bg-secundary-main-color);
+}
+.faq-header__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0;
+  flex-wrap: auto;
+}
+.faq-header__img {
+  height: 35rem;
+}
+.faq-content__container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0;
+  flex-wrap: auto;
+}/*# sourceMappingURL=faq.css.map */

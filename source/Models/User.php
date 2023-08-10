@@ -10,16 +10,19 @@ class User
     private $email;
     private $password;
     private $address;
+    private $idCategory;
 
     public function __construct(
         $name = null,
         $email = null,
         $password = null,
+        $idCategory = null,
         Address $address = null // Parametro novo
     ) {
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
+        $this->idCategory = $idCategory;
         $this->address = $address; // Atribuição nova
     }
 
@@ -66,31 +69,57 @@ class User
     public function insert()
     {
         $query = "INSERT INTO users 
-                  VALUES (NULL,:name,:email,:password)";
+        VALUES (NULL,:name,:email,:password, :id_category)";
         $stmt = Connect::getInstance()->prepare($query);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":password", $this->password);
+        $stmt->bindParam(":id_category", $this->idCategory);
         $stmt->execute();
     }
-
     public function selectAll()
     {
         $query = "SELECT * FROM users";
         $stmt = Connect::getInstance()->query($query);
         return $stmt->fetchAll();
     }
-    public function auth(String $email, String $password)
+
+    public function selectUsersByCategory($category)
     {
-        $sql = "SELECT password, email FROM users WHERE password = :password AND email = :email;";
+    }
+
+    public function auth(String $email, String $password, String $idCategory)
+    {
+        $sql = "SELECT password, email FROM users WHERE password = :password AND email = :email AND id_category = :id_category;";
         $stmt = Connect::getInstance()->prepare($sql);
         $stmt->bindParam(":email", $email);
         $stmt->bindParam(":password", $password);
+        $stmt->bindParam(":id_category", $idCategory);
         $stmt->execute();
         $row = $stmt->rowCount();
         if ($row !== 0) {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Get the value of idCategory
+     */
+    public function getIdCategory()
+    {
+        return $this->idCategory;
+    }
+
+    /**
+     * Set the value of idCategory
+     *
+     * @return  self
+     */
+    public function setIdCategory($idCategory)
+    {
+        $this->idCategory = $idCategory;
+
+        return $this;
     }
 }
